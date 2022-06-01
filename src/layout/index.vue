@@ -1,12 +1,16 @@
 <template>
-  <div class="home">首页</div>
+  <div id="layout"></div>
 </template>
 
 <script lang="ts">
 import { defineComponent } from "vue";
 
 export default defineComponent({
-  name: "Home",
-  components: {},
+  name: "Layout",
+  setup() {
+    return {};
+  },
 });
 </script>
+
+<style scoped></style>
