@@ -2,16 +2,16 @@ export const menu = [
   {
     name: "首页",
     icon: "house",
-    index: "1",
+    index: "/",
   },
   {
     name: "系统管理",
     icon: "goods",
     index: "2",
     submenu: [
-      { name: "用户管理", index: "2-1" },
-      { name: "角色管理", index: "2-2" },
-      { name: "菜单管理", index: "2-3" },
+      { name: "用户管理", index: "/system/users" },
+      { name: "角色管理", index: "/system/role" },
+      { name: "菜单管理", index: "/system/menu" },
       { name: "部门管理", index: "2-4" },
       { name: "岗位管理", index: "2-5" },
       { name: "字典管理", index: "2-6" },

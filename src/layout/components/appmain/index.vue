@@ -1,18 +1,38 @@
 <template>
-  <div id="app-main">
-    <transition name="fade" mode="out-in">
-      <keep-alive>
-        <router-view :key="key"></router-view>
-      </keep-alive>
-    </transition>
-  </div>
+  <el-col id="app-main">
+    <router-view v-slot="{ Component }">
+      <transition
+        name="fade"
+        enter-active-class="animated swing"
+        leave-active-class="animated shake"
+        mode="out-in"
+      >
+        <keep-alive>
+          <component :is="Component" />
+        </keep-alive>
+      </transition>
+    </router-view>
+  </el-col>
 </template>
 
-<script setup lang="ts">
-import { computed } from "vue";
+<script lang="ts">
+import { computed, defineComponent } from "vue";
 import { useRoute } from "vue-router";
-const route = useRoute();
-const key = computed(() => route.path);
+export default defineComponent({
+  setup() {
+    const route = useRoute();
+    const key = computed(() => route.path);
+    return {
+      key,
+    };
+  },
+});
 </script>
 
-<style scoped></style>
+<style scoped>
+#app-main {
+  position: absolute;
+  left: 250px;
+  top: 0;
+}
+</style>

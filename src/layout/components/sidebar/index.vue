@@ -7,6 +7,7 @@
         default-active="1"
         text-color="#fff"
         unique-opened
+        router
       >
         <template v-for="(submenu, index) in menuList" :key="index">
           <template v-if="submenu.submenu">
