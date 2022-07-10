@@ -3,6 +3,10 @@ import Home from "../views/Home.vue";
 import Users from "@/views/system/user/index.vue";
 import Menu from "@/views/system/menu/index.vue";
 import Role from "@/views/system/role/index.vue";
+import Dept from "@/views/system/dept/index.vue";
+import Dict from "@/views/system/dict/index.vue";
+import Job from "@/views/system/job/index.vue";
+import Timing from "@/views/system/timing/index.vue";
 
 const routes: Array<RouteRecordRaw> = [
   {
@@ -24,6 +28,26 @@ const routes: Array<RouteRecordRaw> = [
         path: "system/role",
         name: "role",
         component: Role,
+      },
+      {
+        path: "system/dept",
+        name: "dept",
+        component: Dept,
+      },
+      {
+        path: "system/dict",
+        name: "dict",
+        component: Dict,
+      },
+      {
+        path: "system/job",
+        name: "job",
+        component: Job,
+      },
+      {
+        path: "system/timing",
+        name: "timing",
+        component: Timing,
       },
     ],
   },

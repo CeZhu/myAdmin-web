@@ -1,5 +1,5 @@
 <template>
-  <el-col id="app-main">
+  <div id="app-main">
     <router-view v-slot="{ Component }">
       <transition
         name="fade"
@@ -12,7 +12,7 @@
         </keep-alive>
       </transition>
     </router-view>
-  </el-col>
+  </div>
 </template>
 
 <script lang="ts">
@@ -32,7 +32,8 @@ export default defineComponent({
 <style scoped>
 #app-main {
   position: absolute;
-  left: 250px;
+  left: 220px;
   top: 0;
+  width: 85%;
 }
 </style>
