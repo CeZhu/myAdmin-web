@@ -27,7 +27,7 @@
 
 <script lang="ts">
 import { defineComponent, onMounted, reactive, ref } from "vue";
-import { getMenuList } from "@/api/system/menu";
+import { getMenuPage } from "@/api/system/menu";
 export default defineComponent({
   setup() {
     let tableData = ref([]);
@@ -37,7 +37,7 @@ export default defineComponent({
       size: 10,
     };
     onMounted(() => {
-      getMenuList(params).then((res) => {
+      getMenuPage(params).then((res) => {
         page = res.data;
         tableData.value = page.records;
         console.log(page);
