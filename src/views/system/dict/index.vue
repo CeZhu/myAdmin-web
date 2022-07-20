@@ -22,7 +22,10 @@
             </div>
           </template>
           <el-table :data="dictDetailTableData">
-            <el-table-column label="所属字典" prop="dictId"></el-table-column>
+            <el-table-column
+              label="所属字典"
+              prop="dict.name"
+            ></el-table-column>
             <el-table-column label="字典标签" prop="label"></el-table-column>
             <el-table-column label="字典值" prop="value"></el-table-column>
             <el-table-column label="排序" prop="dictSort"></el-table-column>
