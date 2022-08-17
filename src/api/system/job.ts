@@ -6,3 +6,10 @@ export function getJobPage(params: any) {
     params,
   });
 }
+
+export function getJobList(params: any) {
+  return request({
+    url: "system/job/list",
+    params,
+  });
+}

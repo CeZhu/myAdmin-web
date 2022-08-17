@@ -6,3 +6,10 @@ export function getRolePage(params: any) {
     params,
   });
 }
+
+export function getRoleList(params: any) {
+  return request({
+    url: "/system/role/list",
+    params,
+  });
+}
