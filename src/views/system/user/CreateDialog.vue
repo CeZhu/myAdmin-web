@@ -35,19 +35,21 @@
         <el-row>
           <el-col :span="12">
             <el-form-item label="部门">
-              <el-select v-model="form.dept" :placeholder="selectPlaceHolder">
-                <el-option
-                  v-for="item in deptOptions"
-                  :key="item.name"
-                  :label="item.name"
-                  :value="item.name"
-                />
-              </el-select>
+              <el-tree-select
+                v-model="treeValue"
+                :data="deptOptions"
+                :placeholder="selectPlaceHolder"
+              >
+              </el-tree-select>
             </el-form-item>
           </el-col>
           <el-col :span="12">
             <el-form-item label="岗位">
-              <el-select v-model="form.job" :placeholder="selectPlaceHolder">
+              <el-select
+                v-model="form.job"
+                :placeholder="selectPlaceHolder"
+                multiple
+              >
                 <el-option
                   v-for="item in jobOptions"
                   :key="item.name"
@@ -79,7 +81,11 @@
         <el-row>
           <el-col :span="12">
             <el-form-item label="角色">
-              <el-select v-model="form.role" :placeholder="selectPlaceHolder">
+              <el-select
+                v-model="form.role"
+                :placeholder="selectPlaceHolder"
+                multiple
+              >
                 <el-option
                   v-for="item in roleOptions"
                   :key="item.name"
@@ -121,6 +127,7 @@ import type { FormInstance, FormRules } from "element-plus";
 import { listAll } from "@/api/system/dept";
 import { getJobList } from "@/api/system/job";
 import { getRoleList } from "@/api/system/role";
+import { buildTree } from "@/util/treeUtil";
 export default defineComponent({
   props: {
     dialogVisible: {
@@ -172,11 +179,14 @@ export default defineComponent({
     };
 
     const deptOptions = ref([] as any[]);
+    const treeValue = ref();
     const jobOptions = ref([] as any[]);
     const roleOptions = ref([] as any[]);
+
     onMounted(() => {
       listAll({}).then((res) => {
-        deptOptions.value = res.data;
+        deptOptions.value = buildTree(res.data, "deptId");
+        console.log(deptOptions.value);
       });
       getJobList({}).then((res) => {
         jobOptions.value = res.data;
@@ -197,6 +207,7 @@ export default defineComponent({
       deptOptions,
       jobOptions,
       roleOptions,
+      treeValue,
     };
   },
 });
