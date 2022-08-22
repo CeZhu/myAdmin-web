@@ -6,3 +6,11 @@ export function getUserPage(params: any) {
     params,
   });
 }
+
+export function addUser(data: any) {
+  return request({
+    url: "system/user",
+    method: "post",
+    data,
+  });
+}

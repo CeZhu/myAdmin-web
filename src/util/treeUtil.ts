@@ -36,7 +36,7 @@ export function buildTree(list: any[], key: string): any[] {
   return arr;
 }
 
-const dept1 = {
+/* const dept1 = {
   deptId: 2,
   pid: 7,
   name: "研发部",
@@ -70,3 +70,4 @@ const dept6 = {
 const arr = [dept1, dept2, dept3, dept4, dept5, dept6];
 const result = buildTree(arr, "deptId");
 console.log(result);
+ */

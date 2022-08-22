@@ -64,7 +64,6 @@ export default defineComponent({
         page.total = res.data.total;
         page.records = res.data.records;
         tableData.value = res.data.records;
-        console.log(page);
       });
     }
 

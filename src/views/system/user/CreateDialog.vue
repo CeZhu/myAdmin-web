@@ -36,7 +36,7 @@
           <el-col :span="12">
             <el-form-item label="部门">
               <el-tree-select
-                v-model="treeValue"
+                v-model="form.deptId"
                 :data="deptOptions"
                 :placeholder="selectPlaceHolder"
               >
@@ -46,7 +46,7 @@
           <el-col :span="12">
             <el-form-item label="岗位">
               <el-select
-                v-model="form.job"
+                v-model="form.jobIds"
                 :placeholder="selectPlaceHolder"
                 multiple
               >
@@ -54,7 +54,7 @@
                   v-for="item in jobOptions"
                   :key="item.name"
                   :label="item.name"
-                  :value="item.name"
+                  :value="item.jobId"
                 />
               </el-select>
             </el-form-item>
@@ -82,7 +82,7 @@
           <el-col :span="12">
             <el-form-item label="角色">
               <el-select
-                v-model="form.role"
+                v-model="form.roleIds"
                 :placeholder="selectPlaceHolder"
                 multiple
               >
@@ -90,7 +90,7 @@
                   v-for="item in roleOptions"
                   :key="item.name"
                   :label="item.name"
-                  :value="item.name"
+                  :value="item.roleId"
                 />
               </el-select>
             </el-form-item>
@@ -107,12 +107,7 @@
             "
             >取消</el-button
           >
-          <el-button
-            type="primary"
-            @click="
-              dialogShow = false;
-              resetForm(ruleFormRef);
-            "
+          <el-button type="primary" @click="submitForm(ruleFormRef)"
             >提交</el-button
           >
         </span>
@@ -128,6 +123,8 @@ import { listAll } from "@/api/system/dept";
 import { getJobList } from "@/api/system/job";
 import { getRoleList } from "@/api/system/role";
 import { buildTree } from "@/util/treeUtil";
+import { addUser } from "@/api/system/user";
+import { ElMessage } from "element-plus/lib/components";
 export default defineComponent({
   props: {
     dialogVisible: {
@@ -141,11 +138,11 @@ export default defineComponent({
       phone: "",
       nickName: "",
       email: "",
-      dept: "",
-      job: "",
+      deptId: "",
+      jobIds: [],
       gender: "男",
       enabled: 0,
-      role: "",
+      roleIds: [],
     });
     const rules = reactive<FormRules>({
       username: [
@@ -166,7 +163,15 @@ export default defineComponent({
       if (!formEl) return;
       await formEl.validate((valid, fields) => {
         if (valid) {
-          console.log("submit!");
+          // console.log(form);
+          addUser(form).then(
+            (res) => {
+              ElMessage.success("新增用户成功能！");
+            },
+            (err) => {
+              ElMessage.error("错误!", err.message);
+            }
+          );
         } else {
           console.log("error submit!", fields);
         }
@@ -179,14 +184,13 @@ export default defineComponent({
     };
 
     const deptOptions = ref([] as any[]);
-    const treeValue = ref();
+
     const jobOptions = ref([] as any[]);
     const roleOptions = ref([] as any[]);
 
     onMounted(() => {
       listAll({}).then((res) => {
         deptOptions.value = buildTree(res.data, "deptId");
-        console.log(deptOptions.value);
       });
       getJobList({}).then((res) => {
         jobOptions.value = res.data;
@@ -207,7 +211,6 @@ export default defineComponent({
       deptOptions,
       jobOptions,
       roleOptions,
-      treeValue,
     };
   },
 });
